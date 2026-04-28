@@ -9,7 +9,8 @@ namespace Obsidian_JumpList_Launcher;
 /// </summary>
 public partial class App : Application
 {
-    public const string ObsidianAumid = "com.squirrel.obsidian.obsidian";
+    public const string OBSIDIAN_AUMID = "com.squirrel.obsidian.obsidian";
+    public const int MAX_RECENT_NOTES = 12;
 
     protected override void OnStartup(StartupEventArgs e)
     {
