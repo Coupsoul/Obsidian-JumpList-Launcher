@@ -29,8 +29,6 @@ public class NoteProviderService
 
             foreach (var relativePath in relativePaths.lastOpenFiles)
             {
-                if (recentForVault.Count == App.MAX_RECENT_NOTES) break;
-
                 var noteFullPath = Path.Combine(v.Path, relativePath);
                 if (!File.Exists(noteFullPath)) continue;
 
