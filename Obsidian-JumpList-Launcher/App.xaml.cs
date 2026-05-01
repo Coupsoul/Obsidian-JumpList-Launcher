@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Windows;
 using Obsidian_JumpList_Launcher.Services;
 
@@ -23,28 +24,44 @@ public partial class App : Application
             var locator = new ObsidianLocator();
             var obsidianPath = locator.GetObsidianPath();
 
-            var vaultDiscovery = new VaultDiscoveryService();
-            var noteProvider = new NoteProviderService();
-            var jumpListManager = new JumpListManager(obsidianPath, isRussian);
-
             if (string.IsNullOrEmpty(obsidianPath))
             {
-
+                MessageBox.Show(
+                    isRussian ?
+                    "Не удалось найти установленный Obsidian." : "Could not find installed Obsidian.",
+                    "Obsidian Launcher",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
                 Shutdown();
                 return;
             }
+
+            var vaultDiscovery = new VaultDiscoveryService();
+            var noteProvider = new NoteProviderService();
+            var jumpListManager = new JumpListManager(obsidianPath, isRussian);
 
             var vaults = vaultDiscovery.GetVaults();
             var recentNotes = noteProvider.GetRecentNotes(vaults).ToList();
 
             jumpListManager.UpdateJumpList(recentNotes);
 
-            // Запуск Obsidian
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = obsidianPath,
+                UseShellExecute = true,
+                Arguments = e.Args.Length > 0 ? string.Join(" ", e.Args) : string.Empty
+            };
 
+            Process.Start(startInfo);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Критическая ошибка: {ex.Message}");
+            MessageBox.Show(
+                (isRussian ? "Критическая ошибка: " : "Critical error: ") + ex.Message,
+                "Obsidian Launcher",
+                MessageBoxButton.OK,
+                MessageBoxImage.Stop
+                );
         }
         finally
         {
