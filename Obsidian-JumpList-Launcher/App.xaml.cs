@@ -48,9 +48,13 @@ public partial class App : Application
             var startInfo = new ProcessStartInfo
             {
                 FileName = obsidianPath,
-                UseShellExecute = true,
-                Arguments = e.Args.Length > 0 ? string.Join(" ", e.Args) : string.Empty
+                UseShellExecute = true
             };
+
+            foreach (var arg in e.Args)
+            {
+                startInfo.ArgumentList.Add(arg);
+            }
 
             Process.Start(startInfo);
         }
