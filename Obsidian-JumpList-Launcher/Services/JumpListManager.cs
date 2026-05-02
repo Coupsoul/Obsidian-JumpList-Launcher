@@ -29,7 +29,7 @@ public class JumpListManager
         var manageTask = new JumpTask();
         bool isRussian = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ru";
         manageTask.Title = _isRussian ? "Управление хранилищами" : "Manage vaults";
-        manageTask.ApplicationPath = _obsidianPath;
+        manageTask.ApplicationPath = Environment.ProcessPath;
         manageTask.Arguments = "obsidian://choose-vault";
         manageTask.IconResourcePath = _obsidianPath;
 
@@ -39,7 +39,7 @@ public class JumpListManager
         {
             var recentTask = new JumpTask();
             recentTask.Title = Path.GetFileNameWithoutExtension(note.Title);
-            recentTask.ApplicationPath = _obsidianPath;
+            recentTask.ApplicationPath = Environment.ProcessPath;
             recentTask.IconResourcePath = _obsidianPath;
             recentTask.Arguments = $"obsidian://open?path={Uri.EscapeDataString(note.FilePath)}";
             recentTask.CustomCategory = _isRussian ? "Недавние" : "Recent";
