@@ -30,7 +30,8 @@ public class NoteProviderService
             foreach (var relativePath in relativePaths.lastOpenFiles)
             {
                 var noteFullPath = Path.Combine(v.Path, relativePath);
-                if (!File.Exists(noteFullPath)) continue;
+
+                if (string.IsNullOrEmpty(noteFullPath) || !File.Exists(noteFullPath)) continue;
 
                 recentForVault.Add(new RecentNote(Path.GetFileName(noteFullPath), noteFullPath, v.Name, File.GetLastWriteTime(noteFullPath)));
             }

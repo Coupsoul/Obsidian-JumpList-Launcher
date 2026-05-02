@@ -28,9 +28,10 @@ public class VaultDiscoveryService
         foreach (var vault in config.vaults)
         {
             string vaultPath = vault.Value.path;
-            string vaultName = Path.GetFileName(vaultPath);
+            
+            if (string.IsNullOrEmpty(vaultPath) || !Directory.Exists(vaultPath)) continue;
 
-            vaultsInfo.Add(new VaultInfo(vaultName, vaultPath));
+            vaultsInfo.Add(new VaultInfo(Path.GetFileName(vaultPath), vaultPath));
         }
 
         return vaultsInfo;
