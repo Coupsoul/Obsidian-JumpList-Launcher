@@ -39,7 +39,7 @@ A lightweight Windows utility that replaces the standard Obsidian taskbar shortc
    - **Self-contained**: Includes all necessary libraries (no .NET installation required).
 2. Pin the launcher to your taskbar.
 3. Launch it once to let the utility update the JumpList.
-4. Now, by right-clicking on a shortcut, you can access your 12 most recent notes, which you can pin to keep them at the top, or instantly switch between storages using the "Manage Storage" task.
+4. Now, by right-clicking on a shortcut, you can access your 12 most recent notes, which you can pin to keep them at the top, or instantly switch between vaults using the "Manage Vaults" task.
 
 ## How It Works
 
