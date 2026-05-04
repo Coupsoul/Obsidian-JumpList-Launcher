@@ -27,7 +27,6 @@ public class JumpListManager
         var jumpList = new JumpList();
 
         var manageTask = new JumpTask();
-        bool isRussian = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ru";
         manageTask.Title = _isRussian ? "Управление хранилищами" : "Manage vaults";
         manageTask.ApplicationPath = Environment.ProcessPath;
         manageTask.Arguments = "obsidian://choose-vault";
